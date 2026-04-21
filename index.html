@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Real | Acompanhamento Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #000000;
+    --red-deep: #990000;
+    --red-vivid: #cc0000;
+    --silver: #d9d9d9;
+    --silver-dim: #8a8a8a;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--silver);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .display {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.03em;
+    line-height: 0.95;
+    color: var(--white);
+  }
+
+  h2.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  h3 {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+
+  /* ── DIVIDER ── */
+  .rule {
+    width: 40px;
+    height: 3px;
+    background: var(--red-vivid);
+    margin: 20px 0 28px;
+  }
+
+  .rule-center {
+    margin: 20px auto 28px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(153, 0, 0, 0.25);
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+
+  .nav-logo span { color: var(--red-vivid); }
+
+  .nav-cta {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red-vivid);
+    border: 1px solid var(--red-deep);
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--red-deep); color: var(--white); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: -10%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(153,0,0,0.07) 100%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red-vivid);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--red-vivid);
+  }
+
+  .hero-headline {
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    max-width: 720px;
+  }
+
+  .hero-headline .accent { color: var(--red-vivid); }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 1.1rem;
+    max-width: 520px;
+    color: var(--silver-dim);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-sub strong {
+    color: var(--silver);
+    font-weight: 400;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+    padding: 16px 32px;
+    background: var(--red-vivid);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-whatsapp::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.08);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-whatsapp:hover { background: #e50000; transform: translateY(-1px); }
+  .btn-whatsapp:hover::after { opacity: 1; }
+  .btn-whatsapp:active { transform: translateY(0); }
+
+  .btn-whatsapp .icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+    padding: 15px 32px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(204,0,0,0.5);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--red-vivid); background: rgba(204,0,0,0.08); }
+
+  /* ── PHILOSOPHY ── */
+  #filosofia {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: #050505;
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--red-deep);
+    padding-left: 24px;
+    margin: 32px 0;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--silver);
+    font-weight: 300;
+  }
+
+  .philosophy-body {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--silver-dim);
+  }
+
+  .philosophy-body strong { color: var(--silver); font-weight: 400; }
+
+  /* ── PILLARS ── */
+  #pilares { background: var(--black); }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: rgba(153,0,0,0.2);
+    border: 1px solid rgba(153,0,0,0.2);
+    margin-top: 48px;
+  }
+
+  .pillar {
+    background: #060606;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--red-vivid);
+    transition: height 0.3s ease;
+  }
+
+  .pillar:hover { background: #0c0101; }
+  .pillar:hover::before { height: 100%; }
+
+  .pillar-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: rgba(153,0,0,0.25);
+    line-height: 1;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+  }
+
+  .pillar:hover .pillar-num { color: rgba(204,0,0,0.4); }
+
+  .pillar h3 { margin-bottom: 10px; font-size: 0.9rem; }
+
+  .pillar p {
+    font-size: 0.95rem;
+    color: var(--silver-dim);
+    line-height: 1.7;
+  }
+
+  .pillars-cta {
+    text-align: center;
+    margin-top: 56px;
+  }
+
+  /* ── SERVICES ── */
+  #servicos {
+    background: #020202;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .service-card {
+    border: 1px solid rgba(153,0,0,0.3);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .service-card.featured {
+    border-color: var(--red-vivid);
+  }
+
+  .service-card.featured::before {
+    content: 'MAIS POPULAR';
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--red-vivid);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+  }
+
+  .service-card:hover { border-color: var(--red-vivid); }
+
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    color: var(--silver-dim);
+    line-height: 1.8;
+  }
+
+  .service-card .service-includes {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .service-includes li {
+    list-style: none;
+    font-size: 0.88rem;
+    color: var(--silver-dim);
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .service-includes li::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--red-vivid);
+    flex-shrink: 0;
+  }
+
+  .services-cta {
+    text-align: center;
+    margin-top: 52px;
+  }
+
+  /* ── FAQ ── */
+  #faq {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .faq-list { margin-top: 40px; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 22px 0;
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--red-vivid); }
+
+  .faq-chevron {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--red-deep);
+    transition: transform 0.25s;
+  }
+
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-item.open .faq-question { color: var(--red-vivid); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-item.open .faq-answer { max-height: 300px; }
+
+  .faq-answer p {
+    padding: 0 0 22px;
+    font-size: 0.97rem;
+    color: var(--silver-dim);
+    line-height: 1.8;
+  }
+
+  /* ── FOOTER / CLOSE ── */
+  #fecho {
+    padding: 120px 0 80px;
+    text-align: center;
+    background: #030000;
+    border-top: 1px solid rgba(153,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #fecho::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, rgba(153,0,0,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .fecho-headline {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--silver);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .fecho-headline em { color: var(--white); font-weight: 400; font-style: normal; }
+
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(217,217,217,0.35);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── NOISE TEXTURE overlay ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    z-index: 9999;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    section { padding: 60px 0; }
+    .pillars-grid { gap: 1px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .btn-whatsapp, .btn-secondary { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">LEO<span>ALBA</span></span>
+  <a href="https://wa.me/351999999999" class="nav-cta">WhatsApp</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Consultoria Online de Fitness</div>
+    <h1 class="display hero-headline reveal">
+      Alcança o físico<br>
+      que queres sem<br>
+      <span class="accent">abdicar da vida</span><br>
+      que já tens.
+    </h1>
+    <p class="hero-sub reveal reveal-delay-1">
+      Fitness descomplicado para pessoas comuns.<br>
+      <strong>Sem restrições absurdas ou planos impossíveis de seguir.</strong><br>
+      Apenas uma estratégia real que se molda à tua rotina — e não o contrário.
+    </p>
+    <a href="https://wa.me/351999999999" class="btn-whatsapp reveal reveal-delay-2">
+      <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Quero falar contigo no WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ── FILOSOFIA ── -->
+<section id="filosofia">
+  <div class="container">
+    <h2 class="section-title reveal">Comer, sair e viver...<br>e ainda assim ter resultados.</h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <blockquote class="quote-block reveal reveal-delay-1">
+      A vida não acontece apenas dentro do ginásio ou a pesar alfaces.
+    </blockquote>
+    <p class="philosophy-body reveal reveal-delay-2">
+      Ela acontece nos jantares de amigos, nas festas de família e naqueles dias em que o trabalho te consome o tempo todo.
+      <br><br>
+      O meu objetivo não é dar-te uma "dieta" — é <strong>ensinar-te a gerir estes momentos.</strong> Quero que saibas como aproveitar um evento social sem sentires que deitaste tudo a perder. É sobre aprenderes a equilibrar o bem-estar e o corpo que desejas com os prazeres de que não queres — nem deves — abdicar.
+    </p>
+  </div>
+</section>
+
+<!-- ── PILARES ── -->
+<section id="pilares">
+  <div class="container">
+    <h2 class="section-title reveal">O que inclui<br>o acompanhamento.</h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <h3>Plano de Treino Personalizado</h3>
+        <p>Desenhado para onde treinas e para o tempo que realmente tens disponível. Nada genérico, nada que não faça sentido para a tua vida.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <div class="pillar-num">02</div>
+        <h3>Estratégia Nutricional Flexível</h3>
+        <p>Focada em resultados reais, sem alimentos proibidos ou listas de compras infinitas. Comes o que gostas — aprendes a gerir.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <div class="pillar-num">03</div>
+        <h3>Check-ins & Ajustes Contínuos</h3>
+        <p>Monitorização constante. Se a vida mudar, o plano muda contigo — para não estagnares nem perderes o fio à meada.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <div class="pillar-num">04</div>
+        <h3>Suporte Próximo</h3>
+        <p>Dúvidas? Estás à distância de uma mensagem de WhatsApp. Resposta rápida, sem formulários, sem esperas.</p>
+      </div>
+    </div>
+    <div class="pillars-cta reveal">
+      <a href="https://wa.me/351999999999" class="btn-whatsapp">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Garantir a minha vaga
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVIÇOS ── -->
+<section id="servicos">
+  <div class="container">
+    <h2 class="section-title reveal">Escolhe o teu<br>ponto de partida.</h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <div class="services-grid">
+
+      <div class="service-card featured reveal">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none">
+          <rect x="4" y="4" width="32" height="32" rx="2" stroke="#cc0000" stroke-width="1.5"/>
+          <path d="M12 20h16M20 12v16" stroke="#cc0000" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+        <h3>Acompanhamento Premium</h3>
+        <p>Treino + Nutrição. Para quem quer o pacote completo. Estratégia de treino e alimentação ajustada ao detalhe, com suporte direto e próximo para garantir que chegas onde queres.</p>
+        <ul class="service-includes">
+          <li>Plano de treino personalizado</li>
+          <li>Estratégia nutricional flexível</li>
+          <li>Check-ins e ajustes mensais</li>
+          <li>Suporte por WhatsApp</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none">
+          <path d="M8 32L20 8l12 24" stroke="#990000" stroke-width="1.5" stroke-linecap="square"/>
+          <path d="M11 26h18" stroke="#990000" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+        <h3>Prescrição de Treino — 8 Semanas</h3>
+        <p>Cansado daquele plano genérico que o instrutor do ginásio deu a toda a gente? Se já tens a comida orientada mas queres um treino desenhado especificamente para ti — esta é a tua opção.</p>
+        <ul class="service-includes">
+          <li>Plano de treino 8 semanas</li>
+          <li>Desenhado para o teu ginásio ou casa</li>
+          <li>Focado no que realmente precisas</li>
+        </ul>
+        <p style="margin-top:16px; font-size:0.82rem; color:rgba(138,138,138,0.7);">Nota: Não inclui acompanhamento contínuo.</p>
+      </div>
+
+    </div>
+    <div class="services-cta reveal">
+      <a href="https://wa.me/351999999999" class="btn-whatsapp">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Qual é a melhor opção para mim?
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title reveal">Dúvidas<br>frequentes.</h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <div class="faq-list reveal reveal-delay-1">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          O plano é adaptado a casa ou ginásio?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 7.5l5 5 5-5" stroke-linecap="square"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Sim. O plano é construído à medida do teu contexto — seja ginásio completo, ginásio básico ou apenas o espaço que tens em casa. Dizes-me com o que contas, e eu faço o resto.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Vou ter de deixar de comer o que gosto?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 7.5l5 5 5-5" stroke-linecap="square"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Não. A ideia é exatamente o oposto — aprenderes a incluir o que gostas dentro de uma estratégia que funciona. Sem listas negras, sem culpa, sem alimentos proibidos.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Como funcionam os pagamentos?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 7.5l5 5 5-5" stroke-linecap="square"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Depois de conversarmos no WhatsApp e perceber qual a melhor opção para ti, envio toda a informação sobre valores e formas de pagamento. Sem surpresas.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          E se não conseguir cumprir o plano numa semana?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 7.5l5 5 5-5" stroke-linecap="square"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>É exatamente para isso que existe o suporte. Dizes-me o que aconteceu, ajustamos — e seguimos em frente. Não há retrocesso por causa de uma semana menos boa. A consistência a longo prazo é o que importa.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FECHO ── -->
+<section id="fecho">
+  <div class="container">
+    <p class="fecho-headline reveal">
+      "O melhor momento para começares a encaixar o fitness na tua vida foi ontem. <em>O segundo melhor é agora.</em>"
+    </p>
+    <div style="margin-top:48px;" class="reveal reveal-delay-1">
+      <a href="https://wa.me/351999999999" class="btn-whatsapp" style="font-size:1rem; padding:18px 40px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Bora começar?
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Leo Alba · Consultoria Online de Fitness · Todos os direitos reservados</p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+</script>
+</body>
+</html>
