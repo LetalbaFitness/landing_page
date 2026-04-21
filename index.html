@@ -1,297 +1,122 @@
-import React, { useState } from 'react';
-import { 
-  MessageCircle, 
-  Dumbbell, 
-  Utensils, 
-  RefreshCcw, 
-  Smartphone, 
-  CheckCircle2, 
-  ChevronDown, 
-  ChevronUp,
-  ArrowRight
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Landing Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
 
-const FAQItem = ({ question, answer, isOpen, onClick }) => {
-  return (
-    <div className="border-b border-[#333333] py-4 cursor-pointer" onClick={onClick}>
-      <div className="flex justify-between items-center gap-4">
-        <h4 className="text-lg font-semibold text-[#d9d9d9] hover:text-white transition-colors">{question}</h4>
-        {isOpen ? (
-          <ChevronUp className="text-[#cc0000] flex-shrink-0" size={24} />
-        ) : (
-          <ChevronDown className="text-[#cc0000] flex-shrink-0" size={24} />
-        )}
-      </div>
-      <div 
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <p className="text-[#d9d9d9] leading-relaxed">{answer}</p>
-      </div>
+<body class="min-h-screen bg-black text-[#d9d9d9] font-sans selection:bg-[#cc0000] selection:text-white">
+
+<!-- HEADER -->
+<header class="absolute top-0 w-full z-50 px-6 py-6 border-b border-white/5">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <div class="text-white text-2xl font-black tracking-tighter uppercase flex items-center gap-2">
+      <span class="text-[#cc0000]">/</span>TREINADOR
     </div>
-  );
-};
+  </div>
+</header>
 
-export default function App() {
-  const [openFaq, setOpenFaq] = useState(null);
+<!-- HERO -->
+<section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
+  <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-[#990000] rounded-full blur-[150px] opacity-20"></div>
 
-  const faqs = [
-    {
-      question: "O plano é adaptado a casa ou ginásio?",
-      answer: "A ambos. O plano de treino é desenhado de acordo com o material que tens disponível e o local onde preferes treinar. Sem desculpas, apenas soluções."
-    },
-    {
-      question: "Vou ter de deixar de comer o que gosto?",
-      answer: "Absolutamente não. A estratégia nutricional é flexível. Vais aprender a encaixar os alimentos que gostas nos teus macros e calorias diárias, mantendo o défice ou superavit necessário para os teus objetivos."
-    },
-    {
-      question: "Como funcionam os pagamentos?",
-      answer: "O pagamento é feito numa base mensal (ou pacotes de meses, se preferires). Todo o processo será detalhado quando falarmos no WhatsApp para perceber qual a melhor opção para o teu caso."
-    }
-  ];
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
+      Alcança o físico que queres <br>
+      <span class="text-[#cc0000]">sem abdicar da vida</span> que já tens.
+    </h1>
 
-  const handleWhatsAppClick = () => {
-    window.open('https://wa.me/123456789?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20acompanhamento.', '_blank');
-  };
+    <p class="text-xl md:text-2xl mb-10">
+      Fitness descomplicado para pessoas comuns.
+    </p>
 
-  return (
-    <div className="min-h-screen bg-[#000000] text-[#d9d9d9] font-sans selection:bg-[#cc0000] selection:text-white">
-      
-      {/* HEADER */}
-      <header className="absolute top-0 w-full z-50 px-6 py-6 border-b border-white/5">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="text-white text-2xl font-black tracking-tighter uppercase flex items-center gap-2">
-            <span className="text-[#cc0000]">/</span>TREINADOR
-          </div>
-        </div>
-      </header>
+    <button onclick="whatsapp()"
+      class="flex items-center gap-3 bg-[#cc0000] px-8 py-5 rounded-full font-bold text-lg">
+      <i data-lucide="message-circle"></i>
+      Quero falar contigo
+    </button>
+  </div>
+</section>
 
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-[#990000] rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
-        
-        <div className="max-w-4xl mx-auto flex flex-col items-start relative z-10">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
-            Alcança o físico que queres <br className="hidden md:block"/>
-            <span className="text-[#cc0000]">sem abdicar da vida</span> que já tens.
-          </h1>
-          <p className="text-xl md:text-2xl text-[#d9d9d9] mb-10 max-w-3xl leading-relaxed">
-            Fitness descomplicado para pessoas comuns. Sem restrições absurdas ou planos impossíveis de seguir. Apenas uma estratégia real que se molda à tua rotina — e não o contrário.
-          </p>
-          <button 
-            onClick={handleWhatsAppClick}
-            className="group flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#990000] text-white px-8 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(204,0,0,0.4)] w-full md:w-auto"
-          >
-            <MessageCircle size={24} />
-            Quero falar contigo no WhatsApp
-          </button>
-        </div>
-      </section>
+<!-- PILARES -->
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-      {/* 2. A "FILOSOFIA" */}
-      <section className="py-20 bg-[#080808] border-y border-[#111111] px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-          <div className="order-2 md:order-1 relative">
-            <div className="aspect-[4/5] bg-[#111] rounded-2xl border border-[#333] relative overflow-hidden flex items-center justify-center group">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <div className="text-[#333] text-center z-20 px-8">
-                <Utensils size={48} className="mx-auto mb-4 opacity-50" />
-                <p className="text-sm font-medium uppercase tracking-widest">[ Imagem de Lifestyle / Treino ]</p>
-              </div>
-              <div className="absolute top-0 left-0 w-1 h-full bg-[#cc0000]"></div>
-            </div>
-          </div>
-          
-          <div className="order-1 md:order-2">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
-              Comer, sair e viver... <br/>
-              <span className="text-[#cc0000] italic">e ainda assim ter resultados.</span>
-            </h2>
-            <div className="space-y-6 text-[#d9d9d9] text-lg leading-relaxed">
-              <p>
-                A vida não acontece apenas dentro do ginásio ou a pesar alfaces. Ela acontece nos jantares de amigos, nas festas de família e naqueles dias em que o trabalho te consome o tempo todo.
-              </p>
-              <p className="pl-4 border-l-4 border-[#990000]">
-                O meu objetivo não é dar-te uma "dieta", é <strong className="text-white">ensinar-te a gerir estes momentos</strong>. Quero que saibas como aproveitar um evento social sem sentires que deitaste tudo a perder.
-              </p>
-              <p>
-                É sobre aprenderes a equilibrar o bem-estar e o corpo que desejas com os prazeres de que não queres (nem deves) abdicar.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. OS PILARES */}
-      <section className="py-24 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Como funciona a entrega?</h2>
-            <p className="text-xl text-[#d9d9d9]">Os 4 pilares para resultados consistentes.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {[
-              {
-                icon: <Dumbbell size={32} />,
-                title: "Plano Personalizado",
-                desc: "Desenhado para onde treinas e para o tempo que realmente tens disponível."
-              },
-              {
-                icon: <Utensils size={32} />,
-                title: "Nutrição Flexível",
-                desc: "Focada em resultados reais, sem alimentos proibidos ou listas de compras infinitas."
-              },
-              {
-                icon: <RefreshCcw size={32} />,
-                title: "Check-ins e Ajustes",
-                desc: "Monitorização constante. Se a vida mudar, o plano muda contigo para não estagnares."
-              },
-              {
-                icon: <Smartphone size={32} />,
-                title: "Suporte Próximo",
-                desc: "Dúvidas? Estás à distância de uma mensagem de WhatsApp para as resolvermos."
-              }
-            ].map((pilar, index) => (
-              <div key={index} className="bg-[#0a0a0a] border border-[#222] hover:border-[#990000] p-8 rounded-2xl transition-all group">
-                <div className="w-14 h-14 bg-[#111] rounded-xl flex items-center justify-center text-[#cc0000] mb-6 group-hover:scale-110 transition-transform">
-                  {pilar.icon}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{pilar.title}</h3>
-                <p className="text-[#d9d9d9] text-sm leading-relaxed">{pilar.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <button 
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#990000] text-white px-10 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(204,0,0,0.4)] w-full md:w-auto"
-            >
-              Garantir a minha vaga
-              <ArrowRight size={20} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. SERVIÇOS */}
-      <section className="py-24 bg-[#050505] border-t border-[#1a1a1a] px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Escolhe o teu caminho</h2>
-            <p className="text-xl text-[#d9d9d9]">Serviços diretos, sem letras pequenas.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Card Premium */}
-            <div className="relative bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#cc0000]/50 p-8 md:p-12 rounded-3xl flex flex-col">
-              <div className="absolute top-0 right-0 bg-[#cc0000] text-white text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-3xl uppercase tracking-wider">
-                Mais Escolhido
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4">Acompanhamento Premium</h3>
-              <p className="text-[#cc0000] font-semibold mb-6 flex items-center gap-2">
-                Treino + Nutrição + Suporte <CheckCircle2 size={18}/>
-              </p>
-              <p className="text-[#d9d9d9] mb-8 flex-grow leading-relaxed">
-                Para quem quer o pacote completo. Estratégia de treino e alimentação ajustada ao detalhe, com suporte direto e próximo para garantir que chegas onde queres.
-              </p>
-              <ul className="space-y-3 mb-8 text-[#d9d9d9] text-sm">
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-[#cc0000]"/> Treino desenhado à tua medida</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-[#cc0000]"/> Dieta flexível e exequível</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-[#cc0000]"/> Check-ins semanais/quinzenais</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-[#cc0000]"/> Contacto direto via WhatsApp</li>
-              </ul>
-            </div>
-
-            {/* Card 8 Semanas */}
-            <div className="bg-[#0a0a0a] border border-[#222] p-8 md:p-12 rounded-3xl flex flex-col">
-              <h3 className="text-3xl font-bold text-white mb-4">Prescrição de Treino</h3>
-              <p className="text-[#666] font-semibold mb-6 flex items-center gap-2">
-                Ciclo de 8 Semanas <Dumbbell size={18}/>
-              </p>
-              <p className="text-[#d9d9d9] mb-8 flex-grow leading-relaxed">
-                Cansado daquele plano genérico que o instrutor do ginásio deu a toda a gente? Se já tens a comida orientada mas queres um treino desenhado especificamente para ti, esta é a tua opção. 
-              </p>
-              <p className="text-[#990000] text-sm font-medium mb-8 bg-[#990000]/10 p-4 rounded-xl border border-[#990000]/20">
-                Eu prescrevo o que precisas para 2 meses de foco total — tu só tens de chegar lá e executar. (Nota: Não inclui acompanhamento).
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-16 text-center">
-            <button 
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center justify-center gap-3 bg-transparent border-2 border-[#cc0000] text-white hover:bg-[#cc0000] px-10 py-5 rounded-full font-bold text-lg transition-all w-full md:w-auto"
-            >
-              <MessageCircle size={24} />
-              Qual é a melhor opção para mim?
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. PROVA SOCIAL & FAQ */}
-      <section className="py-24 px-6 relative">
-        <div className="max-w-4xl mx-auto">
-          
-          <div className="mb-24">
-            <h2 className="text-3xl font-bold text-white mb-10 text-center">Eles encaixaram o fitness na rotina.</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="aspect-square bg-[#111] border border-[#222] rounded-xl flex items-center justify-center overflow-hidden relative">
-                  <div className="text-[#333] text-xs font-bold uppercase text-center p-4">[ Foto<br/>Antes/Depois ]</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-10 text-center">Perguntas Frequentes</h2>
-            <div className="bg-[#0a0a0a] border border-[#222] p-6 md:p-10 rounded-3xl">
-              {faqs.map((faq, index) => (
-                <FAQItem 
-                  key={index}
-                  question={faq.question}
-                  answer={faq.answer}
-                  isOpen={openFaq === index}
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. RODAPÉ */}
-      <footer className="bg-[#050505] pt-24 pb-12 px-6 border-t border-[#1a1a1a] relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-full max-w-3xl h-64 bg-[#cc0000] rounded-full blur-[180px] opacity-10 pointer-events-none"></div>
-
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">
-            "O melhor momento para começares a encaixar o fitness na tua vida foi ontem. <br className="hidden md:block"/>
-            <span className="text-[#cc0000]">O segundo melhor é agora.</span>"
-          </h2>
-          
-          <div className="mt-12 mb-20">
-            <button 
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#990000] text-white px-12 py-6 rounded-full font-black text-xl transition-all transform hover:scale-105 hover:shadow-[0_0_30px_rgba(204,0,0,0.5)] w-full md:w-auto"
-            >
-              <MessageCircle size={28} />
-              Bora começar?
-            </button>
-          </div>
-
-          <div className="border-t border-[#222] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#666]">
-            <div className="flex items-center gap-2 text-white font-bold tracking-wider uppercase">
-              <span className="text-[#cc0000]">/</span>TREINADOR
-            </div>
-            <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
-          </div>
-        </div>
-      </footer>
+    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
+      <i data-lucide="dumbbell"></i>
+      <h3 class="text-white font-bold mt-4">Plano Personalizado</h3>
     </div>
-  );
+
+    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
+      <i data-lucide="utensils"></i>
+      <h3 class="text-white font-bold mt-4">Nutrição Flexível</h3>
+    </div>
+
+    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
+      <i data-lucide="refresh-ccw"></i>
+      <h3 class="text-white font-bold mt-4">Check-ins</h3>
+    </div>
+
+    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
+      <i data-lucide="smartphone"></i>
+      <h3 class="text-white font-bold mt-4">Suporte</h3>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-24 px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <h2 class="text-3xl text-white mb-10 text-center">Perguntas Frequentes</h2>
+
+    <div class="space-y-4">
+
+      <div class="faq border-b border-[#333] pb-4 cursor-pointer">
+        <div class="flex justify-between">
+          <h4>O plano é adaptado a casa ou ginásio?</h4>
+          <i data-lucide="chevron-down"></i>
+        </div>
+        <p class="hidden mt-4">A ambos.</p>
+      </div>
+
+      <div class="faq border-b border-[#333] pb-4 cursor-pointer">
+        <div class="flex justify-between">
+          <h4>Vou ter de deixar de comer o que gosto?</h4>
+          <i data-lucide="chevron-down"></i>
+        </div>
+        <p class="hidden mt-4">Não.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-12 border-t border-[#222]">
+  <p>© 2026 Todos os direitos reservados.</p>
+</footer>
+
+<script>
+function whatsapp() {
+  window.open("https://wa.me/123456789", "_blank");
 }
+
+// FAQ toggle
+document.querySelectorAll(".faq").forEach(item => {
+  item.addEventListener("click", () => {
+    const p = item.querySelector("p");
+    p.classList.toggle("hidden");
+  });
+});
+
+// load icons
+lucide.createIcons();
+</script>
+
+</body>
+</html>
