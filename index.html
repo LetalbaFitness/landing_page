@@ -1,122 +1,338 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-  <meta charset="UTF-8">
-  <title>Landing Page</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinador - Landing Page</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Melhorar o smooth scrolling se necessário */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
+<body class="min-h-screen bg-[#000000] text-[#d9d9d9] font-sans selection:bg-[#cc0000] selection:text-white">
 
-<body class="min-h-screen bg-black text-[#d9d9d9] font-sans selection:bg-[#cc0000] selection:text-white">
-
-<!-- HEADER -->
-<header class="absolute top-0 w-full z-50 px-6 py-6 border-b border-white/5">
-  <div class="max-w-6xl mx-auto flex justify-between items-center">
-    <div class="text-white text-2xl font-black tracking-tighter uppercase flex items-center gap-2">
-      <span class="text-[#cc0000]">/</span>TREINADOR
-    </div>
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
-  <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-[#990000] rounded-full blur-[150px] opacity-20"></div>
-
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
-      Alcança o físico que queres <br>
-      <span class="text-[#cc0000]">sem abdicar da vida</span> que já tens.
-    </h1>
-
-    <p class="text-xl md:text-2xl mb-10">
-      Fitness descomplicado para pessoas comuns.
-    </p>
-
-    <button onclick="whatsapp()"
-      class="flex items-center gap-3 bg-[#cc0000] px-8 py-5 rounded-full font-bold text-lg">
-      <i data-lucide="message-circle"></i>
-      Quero falar contigo
-    </button>
-  </div>
-</section>
-
-<!-- PILARES -->
-<section class="py-24 px-6">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
-      <i data-lucide="dumbbell"></i>
-      <h3 class="text-white font-bold mt-4">Plano Personalizado</h3>
-    </div>
-
-    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
-      <i data-lucide="utensils"></i>
-      <h3 class="text-white font-bold mt-4">Nutrição Flexível</h3>
-    </div>
-
-    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
-      <i data-lucide="refresh-ccw"></i>
-      <h3 class="text-white font-bold mt-4">Check-ins</h3>
-    </div>
-
-    <div class="bg-[#0a0a0a] p-8 rounded-2xl">
-      <i data-lucide="smartphone"></i>
-      <h3 class="text-white font-bold mt-4">Suporte</h3>
-    </div>
-
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="py-24 px-6">
-  <div class="max-w-3xl mx-auto">
-
-    <h2 class="text-3xl text-white mb-10 text-center">Perguntas Frequentes</h2>
-
-    <div class="space-y-4">
-
-      <div class="faq border-b border-[#333] pb-4 cursor-pointer">
-        <div class="flex justify-between">
-          <h4>O plano é adaptado a casa ou ginásio?</h4>
-          <i data-lucide="chevron-down"></i>
+    <!-- HEADER -->
+    <header class="absolute top-0 w-full z-50 px-6 py-6 border-b border-white/5">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-black tracking-tighter uppercase flex items-center gap-2">
+                <span class="text-[#cc0000]">/</span>TREINADOR
+            </div>
         </div>
-        <p class="hidden mt-4">A ambos.</p>
-      </div>
+    </header>
 
-      <div class="faq border-b border-[#333] pb-4 cursor-pointer">
-        <div class="flex justify-between">
-          <h4>Vou ter de deixar de comer o que gosto?</h4>
-          <i data-lucide="chevron-down"></i>
+    <!-- 1. HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-[#990000] rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto flex flex-col items-start relative z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
+                Alcança o físico que queres <br class="hidden md:block"/>
+                <span class="text-[#cc0000]">sem abdicar da vida</span> que já tens.
+            </h1>
+            <p class="text-xl md:text-2xl text-[#d9d9d9] mb-10 max-w-3xl leading-relaxed">
+                Fitness descomplicado para pessoas comuns. Sem restrições absurdas ou planos impossíveis de seguir. Apenas uma estratégia real que se molda à tua rotina — e não o contrário.
+            </p>
+            <button 
+                onclick="handleWhatsAppClick()"
+                class="group flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#990000] text-white px-8 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(204,0,0,0.4)] w-full md:w-auto"
+            >
+                <i data-lucide="message-circle" class="w-6 h-6"></i>
+                Quero falar contigo no WhatsApp
+            </button>
         </div>
-        <p class="hidden mt-4">Não.</p>
-      </div>
+    </section>
 
-    </div>
+    <!-- 2. A "FILOSOFIA" -->
+    <section class="py-20 bg-[#080808] border-y border-[#111111] px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="order-2 md:order-1 relative">
+                <div class="aspect-[4/5] bg-[#111] rounded-2xl border border-[#333] relative overflow-hidden flex items-center justify-center group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                    <div class="text-[#333] text-center z-20 px-8">
+                        <i data-lucide="utensils" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                        <p class="text-sm font-medium uppercase tracking-widest">[ Imagem de Lifestyle / Treino ]</p>
+                    </div>
+                    <div class="absolute top-0 left-0 w-1 h-full bg-[#cc0000]"></div>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                    Comer, sair e viver... <br/>
+                    <span class="text-[#cc0000] italic">e ainda assim ter resultados.</span>
+                </h2>
+                <div class="space-y-6 text-[#d9d9d9] text-lg leading-relaxed">
+                    <p>
+                        A vida não acontece apenas dentro do ginásio ou a pesar alfaces. Ela acontece nos jantares de amigos, nas festas de família e naqueles dias em que o trabalho te consome o tempo todo.
+                    </p>
+                    <p class="pl-4 border-l-4 border-[#990000]">
+                        O meu objetivo não é dar-te uma "dieta", é <strong class="text-white">ensinar-te a gerir estes momentos</strong>. Quero que saibas como aproveitar um evento social sem sentires que deitaste tudo a perder.
+                    </p>
+                    <p>
+                        É sobre aprenderes a equilibrar o bem-estar e o corpo que desejas com os prazeres de que não queres (nem deves) abdicar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </div>
-</section>
+    <!-- 3. OS PILARES -->
+    <section class="py-24 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Como funciona a entrega?</h2>
+                <p class="text-xl text-[#d9d9d9]">Os 4 pilares para resultados consistentes.</p>
+            </div>
 
-<!-- FOOTER -->
-<footer class="text-center py-12 border-t border-[#222]">
-  <p>© 2026 Todos os direitos reservados.</p>
-</footer>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Pilar 1 -->
+                <div class="bg-[#0a0a0a] border border-[#222] hover:border-[#990000] p-8 rounded-2xl transition-all group">
+                    <div class="w-14 h-14 bg-[#111] rounded-xl flex items-center justify-center text-[#cc0000] mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="dumbbell" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Plano Personalizado</h3>
+                    <p class="text-[#d9d9d9] text-sm leading-relaxed">Desenhado para onde treinas e para o tempo que realmente tens disponível.</p>
+                </div>
+                <!-- Pilar 2 -->
+                <div class="bg-[#0a0a0a] border border-[#222] hover:border-[#990000] p-8 rounded-2xl transition-all group">
+                    <div class="w-14 h-14 bg-[#111] rounded-xl flex items-center justify-center text-[#cc0000] mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="utensils" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Nutrição Flexível</h3>
+                    <p class="text-[#d9d9d9] text-sm leading-relaxed">Focada em resultados reais, sem alimentos proibidos ou listas de compras infinitas.</p>
+                </div>
+                <!-- Pilar 3 -->
+                <div class="bg-[#0a0a0a] border border-[#222] hover:border-[#990000] p-8 rounded-2xl transition-all group">
+                    <div class="w-14 h-14 bg-[#111] rounded-xl flex items-center justify-center text-[#cc0000] mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="refresh-ccw" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Check-ins e Ajustes</h3>
+                    <p class="text-[#d9d9d9] text-sm leading-relaxed">Monitorização constante. Se a vida mudar, o plano muda contigo para não estagnares.</p>
+                </div>
+                <!-- Pilar 4 -->
+                <div class="bg-[#0a0a0a] border border-[#222] hover:border-[#990000] p-8 rounded-2xl transition-all group">
+                    <div class="w-14 h-14 bg-[#111] rounded-xl flex items-center justify-center text-[#cc0000] mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="smartphone" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Suporte Próximo</h3>
+                    <p class="text-[#d9d9d9] text-sm leading-relaxed">Dúvidas? Estás à distância de uma mensagem de WhatsApp para as resolvermos.</p>
+                </div>
+            </div>
 
-<script>
-function whatsapp() {
-  window.open("https://wa.me/123456789", "_blank");
-}
+            <div class="text-center">
+                <button 
+                    onclick="handleWhatsAppClick()"
+                    class="inline-flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#990000] text-white px-10 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(204,0,0,0.4)] w-full md:w-auto"
+                >
+                    Garantir a minha vaga
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-// FAQ toggle
-document.querySelectorAll(".faq").forEach(item => {
-  item.addEventListener("click", () => {
-    const p = item.querySelector("p");
-    p.classList.toggle("hidden");
-  });
-});
+    <!-- 4. SERVIÇOS -->
+    <section class="py-24 bg-[#050505] border-t border-[#1a1a1a] px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Escolhe o teu caminho</h2>
+                <p class="text-xl text-[#d9d9d9]">Serviços diretos, sem letras pequenas.</p>
+            </div>
 
-// load icons
-lucide.createIcons();
-</script>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Card Premium -->
+                <div class="relative bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#cc0000]/50 p-8 md:p-12 rounded-3xl flex flex-col">
+                    <div class="absolute top-0 right-0 bg-[#cc0000] text-white text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-3xl uppercase tracking-wider">
+                        Mais Escolhido
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-4">Acompanhamento Premium</h3>
+                    <p class="text-[#cc0000] font-semibold mb-6 flex items-center gap-2">
+                        Treino + Nutrição + Suporte <i data-lucide="check-circle-2" class="w-[18px] h-[18px]"></i>
+                    </p>
+                    <p class="text-[#d9d9d9] mb-8 flex-grow leading-relaxed">
+                        Para quem quer o pacote completo. Estratégia de treino e alimentação ajustada ao detalhe, com suporte direto e próximo para garantir que chegas onde queres.
+                    </p>
+                    <ul class="space-y-3 mb-8 text-[#d9d9d9] text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="text-[#cc0000] w-4 h-4"></i> Treino desenhado à tua medida</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="text-[#cc0000] w-4 h-4"></i> Dieta flexível e exequível</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="text-[#cc0000] w-4 h-4"></i> Check-ins semanais/quinzenais</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="text-[#cc0000] w-4 h-4"></i> Contacto direto via WhatsApp</li>
+                    </ul>
+                </div>
 
+                <!-- Card 8 Semanas -->
+                <div class="bg-[#0a0a0a] border border-[#222] p-8 md:p-12 rounded-3xl flex flex-col">
+                    <h3 class="text-3xl font-bold text-white mb-4">Prescrição de Treino</h3>
+                    <p class="text-[#666] font-semibold mb-6 flex items-center gap-2">
+                        Ciclo de 8 Semanas <i data-lucide="dumbbell" class="w-[18px] h-[18px]"></i>
+                    </p>
+                    <p class="text-[#d9d9d9] mb-8 flex-grow leading-relaxed">
+                        Cansado daquele plano genérico que o instrutor do ginásio deu a toda a gente? Se já tens a comida orientada mas queres um treino desenhado especificamente para ti, esta é a tua opção. 
+                    </p>
+                    <p class="text-[#990000] text-sm font-medium mb-8 bg-[#990000]/10 p-4 rounded-xl border border-[#990000]/20">
+                        Eu prescrevo o que precisas para 2 meses de foco total — tu só tens de chegar lá e executar. (Nota: Não inclui acompanhamento).
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <button 
+                    onclick="handleWhatsAppClick()"
+                    class="inline-flex items-center justify-center gap-3 bg-transparent border-2 border-[#cc0000] text-white hover:bg-[#cc0000] px-10 py-5 rounded-full font-bold text-lg transition-all w-full md:w-auto"
+                >
+                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    Qual é a melhor opção para mim?
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PROVA SOCIAL & FAQ -->
+    <section class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="mb-24">
+                <h2 class="text-3xl font-bold text-white mb-10 text-center">Eles encaixaram o fitness na rotina.</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Cards de Imagens (1 a 4) -->
+                    <div class="aspect-square bg-[#111] border border-[#222] rounded-xl flex items-center justify-center overflow-hidden relative">
+                        <div class="text-[#333] text-xs font-bold uppercase text-center p-4">[ Foto<br/>Antes/Depois ]</div>
+                    </div>
+                    <div class="aspect-square bg-[#111] border border-[#222] rounded-xl flex items-center justify-center overflow-hidden relative">
+                        <div class="text-[#333] text-xs font-bold uppercase text-center p-4">[ Foto<br/>Antes/Depois ]</div>
+                    </div>
+                    <div class="aspect-square bg-[#111] border border-[#222] rounded-xl flex items-center justify-center overflow-hidden relative">
+                        <div class="text-[#333] text-xs font-bold uppercase text-center p-4">[ Foto<br/>Antes/Depois ]</div>
+                    </div>
+                    <div class="aspect-square bg-[#111] border border-[#222] rounded-xl flex items-center justify-center overflow-hidden relative">
+                        <div class="text-[#333] text-xs font-bold uppercase text-center p-4">[ Foto<br/>Antes/Depois ]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold text-white mb-10 text-center">Perguntas Frequentes</h2>
+                <div class="bg-[#0a0a0a] border border-[#222] p-6 md:p-10 rounded-3xl" id="faq-container">
+                    
+                    <!-- FAQ Item 1 -->
+                    <div class="border-b border-[#333333] py-4">
+                        <div class="flex justify-between items-center gap-4 cursor-pointer faq-header">
+                            <h4 class="text-lg font-semibold text-[#d9d9d9] hover:text-white transition-colors">O plano é adaptado a casa ou ginásio?</h4>
+                            <i data-lucide="chevron-down" class="text-[#cc0000] flex-shrink-0 icon-down w-6 h-6"></i>
+                            <i data-lucide="chevron-up" class="text-[#cc0000] flex-shrink-0 icon-up w-6 h-6 hidden"></i>
+                        </div>
+                        <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+                            <p class="text-[#d9d9d9] leading-relaxed">A ambos. O plano de treino é desenhado de acordo com o material que tens disponível e o local onde preferes treinar. Sem desculpas, apenas soluções.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border-b border-[#333333] py-4">
+                        <div class="flex justify-between items-center gap-4 cursor-pointer faq-header">
+                            <h4 class="text-lg font-semibold text-[#d9d9d9] hover:text-white transition-colors">Vou ter de deixar de comer o que gosto?</h4>
+                            <i data-lucide="chevron-down" class="text-[#cc0000] flex-shrink-0 icon-down w-6 h-6"></i>
+                            <i data-lucide="chevron-up" class="text-[#cc0000] flex-shrink-0 icon-up w-6 h-6 hidden"></i>
+                        </div>
+                        <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+                            <p class="text-[#d9d9d9] leading-relaxed">Absolutamente não. A estratégia nutricional é flexível. Vais aprender a encaixar os alimentos que gostas nos teus macros e calorias diárias, mantendo o défice ou superavit necessário para os teus objetivos.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="border-b border-[#333333] py-4">
+                        <div class="flex justify-between items-center gap-4 cursor-pointer faq-header">
+                            <h4 class="text-lg font-semibold text-[#d9d9d9] hover:text-white transition-colors">Como funcionam os pagamentos?</h4>
+                            <i data-lucide="chevron-down" class="text-[#cc0000] flex-shrink-0 icon-down w-6 h-6"></i>
+                            <i data-lucide="chevron-up" class="text-[#cc0000] flex-shrink-0 icon-up w-6 h-6 hidden"></i>
+                        </div>
+                        <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+                            <p class="text-[#d9d9d9] leading-relaxed">O pagamento é feito numa base mensal (ou pacotes de meses, se preferires). Todo o processo será detalhado quando falarmos no WhatsApp para perceber qual a melhor opção para o teu caso.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. RODAPÉ -->
+    <footer class="bg-[#050505] pt-24 pb-12 px-6 border-t border-[#1a1a1a] relative overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-full max-w-3xl h-64 bg-[#cc0000] rounded-full blur-[180px] opacity-10 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">
+                "O melhor momento para começares a encaixar o fitness na tua vida foi ontem. <br class="hidden md:block"/>
+                <span class="text-[#cc0000]">O segundo melhor é agora.</span>"
+            </h2>
+            
+            <div class="mt-12 mb-20">
+                <button 
+                    onclick="handleWhatsAppClick()"
+                    class="inline-flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#990000] text-white px-12 py-6 rounded-full font-black text-xl transition-all transform hover:scale-105 hover:shadow-[0_0_30px_rgba(204,0,0,0.5)] w-full md:w-auto"
+                >
+                    <i data-lucide="message-circle" class="w-7 h-7"></i>
+                    Bora começar?
+                </button>
+            </div>
+
+            <div class="border-t border-[#222] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#666]">
+                <div class="flex items-center gap-2 text-white font-bold tracking-wider uppercase">
+                    <span class="text-[#cc0000]">/</span>TREINADOR
+                </div>
+                <p>© <span id="current-year"></span> Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts da Lógica Interativa -->
+    <script>
+        // Inicializar os ícones Lucide
+        lucide.createIcons();
+
+        // 1. Lógica do botão do WhatsApp
+        function handleWhatsAppClick() {
+            window.open('https://wa.me/123456789?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20acompanhamento.', '_blank');
+        }
+
+        // 2. Colocar o ano atual no rodapé automaticamente
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 3. Lógica do FAQ (Acordeão)
+        const faqHeaders = document.querySelectorAll('.faq-header');
+        
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const iconDown = header.querySelector('.icon-down');
+                const iconUp = header.querySelector('.icon-up');
+                const isOpen = content.classList.contains('max-h-96');
+
+                // Fechar todos os outros abertos antes de abrir o novo
+                document.querySelectorAll('.faq-content').forEach(c => {
+                    c.classList.remove('max-h-96', 'opacity-100', 'mt-4');
+                    c.classList.add('max-h-0', 'opacity-0');
+                });
+                document.querySelectorAll('.icon-down').forEach(i => i.classList.remove('hidden'));
+                document.querySelectorAll('.icon-up').forEach(i => i.classList.add('hidden'));
+
+                // Se não estava aberto, abrimos agora
+                if (!isOpen) {
+                    content.classList.remove('max-h-0', 'opacity-0');
+                    content.classList.add('max-h-96', 'opacity-100', 'mt-4');
+                    iconDown.classList.add('hidden');
+                    iconUp.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
